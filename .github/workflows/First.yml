@@ -38,6 +38,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          date
   job2:
     name: Second Job
     # The type of runner that the job will run on
@@ -49,6 +50,31 @@ jobs:
       - name : Step one
         uses: actions/checkout@v2
       - name: Step two
-        run: "Get-ChildItem Env:| Sort-Object Name"
+        run: date
+  job3:
+    name: third Job
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name : Step one
+        uses: actions/checkout@v2
+      - name: Step two
+        run: date
+  job4:
+    needs: [ job1, job2, job3 ]
+    name: fourth Job
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name : Step one
+        uses: actions/checkout@v2
+      - name: Step two
+        run: date
 
 
